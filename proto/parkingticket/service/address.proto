@@ -1,0 +1,15 @@
+syntax = "proto3";
+
+package proto.parkingticket.service; // Requried to generate valid code.
+
+option java_package = "proto.parkingticket.service";
+option java_outer_classname = "AddressProtos";
+
+
+// Always import protos with a full path relative to the WORKSPACE file.
+import "proto/parkingticket/service/zip_code.proto";
+
+message Address {
+  string city = 1;
+  ZipCode zip_code = 2;
+}

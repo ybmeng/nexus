@@ -1,0 +1,13 @@
+syntax = "proto3";
+
+package proto.parkingticket.service; // Requried to generate valid code.
+
+// Always import protos with a full path relative to the WORKSPACE file.
+import "proto/parkingticket/service/address.proto";
+
+message Person {
+  string name = 1;
+  int32 id = 2;
+  string email = 3;
+  Address address = 4;
+}
