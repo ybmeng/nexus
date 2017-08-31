@@ -1,0 +1,53 @@
+syntax = "proto3";
+
+package proto.nexus.payment.service;
+
+service Payment {
+  // Initializes the payment.
+  rpc InitializePayment(InitializePaymentRequest)
+    returns (InitializePaymentResponse) {}
+
+  // Immediately processes the payment and gets the final result.
+  rpc Capture(CaptureRequest)
+    returns (CaptureResponse) {}
+}
+
+message InitializePaymentRequest {
+  Instrument instrument = 1;
+}
+
+message InitializePaymentResponse {
+  // ID of the payment.
+  string payment_id = 1;
+}
+
+message CaptureRequest {
+  string payment_id = 1;
+  Amount request_amount = 2;
+}
+
+message CaptureResponse {
+  string payment_id = 1;
+  PaymentResult payment_result = 2;
+}
+
+enum InstrumentType {
+  UNKNOWN = 0;
+  WECHAT = 1;
+}
+
+message Instrument {
+  InstrumentType instrument_type = 1;
+}
+
+enum PaymentResult {
+  UNKNOWN = 0;
+  SUCCESS = 1;
+  DECLINED = 2;
+  FAILED = 3;
+}
+
+message Amount {
+  int64 amount_in_micros = 1;
+  string currency = 2;
+}
